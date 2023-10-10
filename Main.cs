@@ -39,13 +39,13 @@ namespace Zad1
             thicknessLabel.Text = "Grubość linii:";
             thicknessLabel.Location = new Point(10, 40);
             lineRadioBtn = new RadioButton();
-            lineRadioBtn.Text = "Line";
+            lineRadioBtn.Text = "Linia";
             lineRadioBtn.Location = new Point(300, 10);
             rectangleRadioBtn = new RadioButton();
-            rectangleRadioBtn.Text = "Rectangle";
+            rectangleRadioBtn.Text = "Prostokąt";
             rectangleRadioBtn.Location = new Point(300, 30);
             circleRadioBtn = new RadioButton();
-            circleRadioBtn.Text = "Circle";
+            circleRadioBtn.Text = "Okrąg";
             circleRadioBtn.Location = new Point(300, 50);
 
             exportBtn = new Button();
