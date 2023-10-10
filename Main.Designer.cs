@@ -20,7 +20,7 @@ namespace Zad1
             var json = JsonConvert.SerializeObject(importExport);
             var settings = new JsonSerializerSettings
             {
-                Formatting = Formatting.Indented // Formatowanie z wcięciami dla czytelności
+                Formatting = Formatting.Indented
             };
             File.WriteAllText("Export.json", json);
         }
@@ -35,22 +35,6 @@ namespace Zad1
                 _circles = Mapper.GetCircles(importExport._circleDtos);
                 _rectangles = Mapper.GetCustomRectangles(importExport._rectangleDtos);
                 Draw(sender, new PaintEventArgs(CreateGraphics(), this.ClientRectangle));
-                /*Graphics g = this.CreateGraphics();
-                foreach (var circle in _circles)
-                {
-                    circle.Graphics = g;
-                    circle.Draw(g);
-                }
-                foreach (var line in _lines)
-                {
-                    line.Graphics = g;
-                    line.Draw(g);
-                }
-                foreach (var rectangle in _rectangles)
-                {
-                    rectangle.Graphics = g;
-                    rectangle.Draw(g);
-                }*/
                 this.Invalidate();
             }
             catch (FileNotFoundException)
