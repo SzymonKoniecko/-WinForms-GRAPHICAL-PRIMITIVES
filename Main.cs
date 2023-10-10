@@ -4,7 +4,7 @@ namespace Zad1
 {
     public partial class Main : Form
     {
-        private TextBox colorTextBox;
+        private TextBox colorFiguresTextBox;
         private TextBox thicknessTextBox;
         private Button drawOptionsBtn;
         private Button exportBtn;
@@ -31,9 +31,9 @@ namespace Zad1
             colorLabel.Text = "Kolor linii:";
             colorLabel.Location = new Point(10, 10);
 
-            colorTextBox = new TextBox();
-            colorTextBox.Location = new Point(120, 10);
-            colorTextBox.Text = "Blue";
+            colorFiguresTextBox = new TextBox();
+            colorFiguresTextBox.Location = new Point(120, 10);
+            colorFiguresTextBox.Text = "Blue";
 
             Label thicknessLabel = new Label();
             thicknessLabel.Text = "Grubość linii:";
@@ -66,7 +66,7 @@ namespace Zad1
 
             this.Size = new Size(1200, 800);
             this.Controls.Add(colorLabel);
-            this.Controls.Add(colorTextBox);
+            this.Controls.Add(colorFiguresTextBox);
             this.Controls.Add(thicknessLabel);
             this.Controls.Add(thicknessTextBox);
             this.Controls.Add(drawOptionsBtn);

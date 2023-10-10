@@ -64,7 +64,7 @@ namespace Zad1
         }
         private void PenChanger(object sender, EventArgs e)
         {
-            circleColor = Color.FromName(colorTextBox.Text);
+            circleColor = Color.FromName(colorFiguresTextBox.Text);
             circleThickness = int.Parse(thicknessTextBox.Text);
             this.Invalidate();
         }
