@@ -33,11 +33,13 @@ This is a simple WinForms application that allows you to draw three types of pri
 - Use the "Load" button to open and edit your saved drawings.
 
 
-Technologies Used
+**Technologies Used**
+
 C# for the WinForms application.
 .NET Framework 7.0 for Windows application development.
-Author
+
+**Author**
 Szymon Koniecko
 
-License
+**License**
 This project is licensed under the MIT License.
