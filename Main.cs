@@ -4,91 +4,85 @@ namespace Zad1
 {
     public partial class Main : Form
     {
-        private TextBox colorTextBox;
+        private TextBox colorFiguresTextBox;
         private TextBox thicknessTextBox;
-        private Button drawButton;
+        private Button drawOptionsBtn;
+        private Button exportBtn;
+        private Button importBtn;
+        private RadioButton lineRadioBtn;
+        private RadioButton rectangleRadioBtn;
+        private RadioButton circleRadioBtn;
+        private List<Circle> _circles = new List<Circle>();
+        private List<Line> _lines = new List<Line>();
+        private List<CustomRectangle> _rectangles = new List<CustomRectangle>();
+
+
+        private Circle currentCircle;
+        private CustomRectangle currentRectangle;
+        private Line currentLine;
+        private Point startMouseDownLocation;
+        private Point mouseDownLocation;
         private Color circleColor = Color.Blue;
         private int circleThickness = 2;
-        private static Point startPoint;
-        private static Point endPoint;
-        private bool isDrawing = false;
-        private List<Circle> _Circles = new List<Circle>();
+
         public Main()
         {
-
-            this.Text = "Panel graficzny";
-            this.Size = new Size(1200, 800);
-
             Label colorLabel = new Label();
             colorLabel.Text = "Kolor linii:";
             colorLabel.Location = new Point(10, 10);
 
-            colorTextBox = new TextBox();
-            colorTextBox.Location = new Point(120, 10);
-            colorTextBox.Text = "Blue";
+            colorFiguresTextBox = new TextBox();
+            colorFiguresTextBox.Location = new Point(120, 10);
+            colorFiguresTextBox.Text = "Blue";
 
             Label thicknessLabel = new Label();
             thicknessLabel.Text = "Grubość linii:";
             thicknessLabel.Location = new Point(10, 40);
+            lineRadioBtn = new RadioButton();
+            lineRadioBtn.Text = "Linia";
+            lineRadioBtn.Location = new Point(300, 10);
+            rectangleRadioBtn = new RadioButton();
+            rectangleRadioBtn.Text = "Prostokąt";
+            rectangleRadioBtn.Location = new Point(300, 30);
+            circleRadioBtn = new RadioButton();
+            circleRadioBtn.Text = "Okrąg";
+            circleRadioBtn.Location = new Point(300, 50);
 
+            exportBtn = new Button();
+            exportBtn.Text = "Export";
+            exportBtn.Location = new System.Drawing.Point(450, 20);
+            importBtn = new Button();
+            importBtn.Text = "Import";
+            importBtn.Location = new System.Drawing.Point(450, 40);
+            importBtn.Click += new EventHandler(Import);
+            exportBtn.Click += new EventHandler(Export);
             thicknessTextBox = new TextBox();
             thicknessTextBox.Location = new Point(120, 40);
             thicknessTextBox.Text = "2";
+            drawOptionsBtn = new Button();
+            drawOptionsBtn.Text = "Edytuj";
+            drawOptionsBtn.Location = new Point(10, 70);
+            drawOptionsBtn.Click += new EventHandler(PenChanger);
 
-            drawButton = new Button();
-            drawButton.Text = "Edytuj";
-            drawButton.Location = new Point(10, 70);
-            drawButton.Click += new EventHandler(Changer);
-
+            this.Size = new Size(1200, 800);
             this.Controls.Add(colorLabel);
-            this.Controls.Add(colorTextBox);
+            this.Controls.Add(colorFiguresTextBox);
             this.Controls.Add(thicknessLabel);
             this.Controls.Add(thicknessTextBox);
-            this.Controls.Add(drawButton);
-            this.DoubleBuffered = true;
-            this.MouseUp += new MouseEventHandler(MouseUpEvent);
-            this.MouseDown += new MouseEventHandler(MouseReleaseEvent);
-            this.MouseMove += new MouseEventHandler(MouseMoveEvent);
-            this.Paint += new PaintEventHandler(PaintEvent);
-        }
-        private void MouseReleaseEvent(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                startPoint = e.Location;
-                endPoint = startPoint;
-                isDrawing = true;
-            }
-        }
-        private void MouseMoveEvent(object sender, MouseEventArgs e)
-        {
-            if (isDrawing)
-            {
-                endPoint = e.Location;
-                this.Paint += new PaintEventHandler(PaintEvent);
-                this.Invalidate();
-            }
-        }
-        private void MouseUpEvent(object sender, MouseEventArgs e)
-        {
-            startPoint = e.Location;
-            CircleInit();
-            this.Paint += new PaintEventHandler(PaintEvent);
-            if (e.Button == MouseButtons.Left)
-            {
-
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                // idk
-            }
-        }
-        private void PaintEvent(object sender, PaintEventArgs e)
-        {
-            foreach (var circle in _Circles)
-            {
-                circle.Draw(this, e);
-            }
+            this.Controls.Add(drawOptionsBtn);
+            this.Controls.Add(lineRadioBtn);
+            this.Controls.Add(rectangleRadioBtn);
+            this.Controls.Add(circleRadioBtn);
+            this.Controls.Add(importBtn);
+            this.Controls.Add(exportBtn);
+            Text = "Zad1";
+            DoubleBuffered = true;
+            currentCircle = null;
+            mouseDownLocation = Point.Empty;
+            MouseDown += MouseDownEvent;
+            MouseMove += MouseMoveEvent;
+            MouseUp += MouseUpEvent;
+            Paint += Draw;
         }
     }
 }
